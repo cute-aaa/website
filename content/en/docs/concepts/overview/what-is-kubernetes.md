@@ -2,7 +2,7 @@
 reviewers:
 - bgrant0607
 - mikedanese
-title: What is Kubernetes
+title: Kubernetes是什么
 content_template: templates/concept
 weight: 10
 card:
@@ -15,77 +15,77 @@ This page is an overview of Kubernetes.
 {{% /capture %}}
 
 {{% capture body %}}
-Kubernetes is a portable, extensible, open-source platform for managing containerized workloads and services, that facilitates both declarative configuration and automation. It has a large, rapidly growing ecosystem. Kubernetes services, support, and tools are widely available.
+Kubernetes 是一个可移植、可扩展的开源平台，用来管理容器化的工作负载和服务，有助于促进声明式配置和自动化操作。它拥有数量庞大、发展快速的生态系统。Kubernetes拥有广泛的服务、支持和工具。
 
-The name Kubernetes originates from Greek, meaning helmsman or pilot. Google open-sourced the Kubernetes project in 2014. Kubernetes builds upon a [decade and a half of experience that Google has with running production workloads at scale](https://ai.google/research/pubs/pub43438), combined with best-of-breed ideas and practices from the community.
+Kubernetes这个名字源于希腊语，意思是舵手或飞行员。谷歌在2014年开放了Kubernetes项目。 Kubernetes [建立在谷歌运行了十五年产品工作负载的经验之上](https://ai.google/research/pubs/pub43438)，结合了社区中的最佳创意和实践。
 
-## Going back in time
-Let's take a look at why Kubernetes is so useful by going back in time.
+## 回首往昔
+回首往昔，你就会发现为什么Kubernetes这么有用。
 
 ![Deployment evolution](/images/docs/Container_Evolution.svg)
 
-**Traditional deployment era:**
-Early on, organizations ran applications on physical servers. There was no way to define resource boundaries for applications in a physical server, and this caused resource allocation issues. For example, if multiple applications run on a physical server, there can be instances where one application would take up most of the resources, and as a result, the other applications would underperform. A solution for this would be to run each application on a different physical server. But this did not scale as resources were underutilized, and it was expensive for organizations to maintain many physical servers.
+**传统部署时代：**
+早期，组织在物理服务器上运行程序。无法为物理服务器中的应用程序定义资源边界，这会导致资源分配问题。例如，如果有多个应用在物理服务器上运行，可能会发生一个应用程序占用了大部分资源的情况，于是其他的应用就会运行不佳。一个解决方案是把每一个程序都运行在不同的物理服务器上。但是资源没有得到充分利用，而且组织要维护很多物理服务器，成本很高。
 
-**Virtualized deployment era:**  As a solution, virtualization was introduced. It allows you to run multiple Virtual Machines (VMs) on a single physical server's CPU. Virtualization allows applications to be isolated between VMs and provides a level of security as the information of one application cannot be freely accessed by another application.
+**虚拟化部署时代：**  作为解决方案，虚拟化被引入了。它允许你在单个物理服务器的CPU上运行多个虚拟机（VMs）。虚拟化使应用被隔离在各个虚拟机之间，并且提供了一定程度的安全性，因为一个应用程序无法自由访问另一个应用程序的信息。
 
-Virtualization allows better utilization of resources in a physical server and allows better scalability because an application can be added or updated easily, reduces hardware costs, and much more.
+虚拟化可以更好的利用物理服务器的资源，并且可以实现更好的可扩展性，因为可以很容易地添加或更新应用程序，从而降低硬件成本，等等。
 
-Each VM is a full machine running all the components, including its own operating system, on top of the virtualized hardware.
+在虚拟化硬件上的每个虚拟机都是一个完整的计算机，它包含了自己的操作系统。
 
-**Container deployment era:** Containers are similar to VMs, but they have relaxed isolation properties to share the Operating System (OS) among the applications. Therefore, containers are considered lightweight. Similar to a VM, a container has its own filesystem, CPU, memory, process space, and more. As they are decoupled from the underlying infrastructure, they are portable across clouds and OS distributions.
+**容器部署时代：** 容器类似于虚拟机，但容器使用了宽松的隔离属性来共享操作系统（OS）。因此，容器被认为是轻量的。与虚拟机类似容器有自己的文件系统、CPU、内存、进程空间等.不过由于它们与底层基础设施解耦，因此可以跨云和操作系统移植。
 
-Containers are becoming popular because they have many benefits. Some of the container benefits are listed below:
+容器越来越受欢迎,因为他们有很多好处.下面列出了一些容器的优势:
 
-* Agile application creation and deployment: increased ease and efficiency of container image creation compared to VM image use.
-* Continuous development, integration, and deployment: provides for reliable and frequent container image build and deployment with quick and easy rollbacks (due to image immutability).
-* Dev and Ops separation of concerns: create application container images at build/release time rather than deployment time, thereby decoupling applications from infrastructure.
-* Observability not only surfaces OS-level information and metrics, but also application health and other signals.
-* Environmental consistency across development, testing, and production: Runs the same on a laptop as it does in the cloud.
-* Cloud and OS distribution portability: Runs on Ubuntu, RHEL, CoreOS, on-prem, Google Kubernetes Engine, and anywhere else.
-* Application-centric management: Raises the level of abstraction from running an OS on virtual hardware to running an application on an OS using logical resources.
-* Loosely coupled, distributed, elastic, liberated micro-services: applications are broken into smaller, independent pieces and can be deployed and managed dynamically – not a monolithic stack running on one big single-purpose machine.
-* Resource isolation: predictable application performance.
-* Resource utilization: high efficiency and density.
+* 敏捷的应用程序创建和部署:与使用VM映像相比，增加了容器映像创建的简便性和效率。
+* 通过快速简便的回滚提供可靠且频繁的容器映像构建和部署（因为映像有不变性）。
+* 开发(Dev)与维护(Ops)分离：在构建/发布时而不是部署时创建应用程序容器映像，从而将应用程序与基础架构分离。
+* 观测能力不仅可以显示操作系统级的信息和指标，还可以显示应用程序健康状况和其他信号。
+* 开发，测试和生产的环境一致性：在笔记本电脑上运行与在云中运行都是一样的。
+* 云和操作系统发行版的可移植性:可以运行在Ubuntu、RHEL、CoreOS、本地、谷歌Kubernetes引擎和任何其他地方。
+* 以应用程序为中心的管理:将抽象级别从在虚拟硬件上运行操作系统提升到使用逻辑资源在操作系统上运行应用程序。
+* 松散耦合、分布式、弹性、无约束的微服务:应用程序被分解成更小的独立部分，可以动态地部署和管理--而不是运行在一台大型单用途机器上的单一堆栈。
+* 资源隔离:可预知的应用程序性能。
+* 资源利用:效率高、密度大。
 
-## Why do I need Kubernetes and what can it do
+## 为什么我需要Kubernetes ?它能做什么
 
-Containers are a good way to bundle and run your applications. In a production environment, you need to manage the containers that run the applications and ensure that there is no downtime. For example, if a container goes down, another container needs to restart. Wouldn't it be easier if this behavior was handled by a system?
+容器是打包和运行应用程序的好方法。在生产环境中，您需要管理运行应用程序的容器，并确保不会停机.比如,例如，如果一个容器发生故障，就需要重新启动另一个容器。这个行为由一个系统来处理不是更容易吗?
 
-That's how Kubernetes comes to the rescue! Kubernetes provides you with a framework to run distributed systems resiliently. It takes care of your scaling requirements, failover, deployment patterns, and more. For example, Kubernetes can easily manage a canary deployment for your system.
+这时就需要Kubernetes这个大救星了!Kubernetes提供了一个可以弹性运行的分布式系统框架.它负责您的扩展需求、故障转移、部署模式等。比如,Kubernetes可以轻松地为您的系统管理canary部署
 
-Kubernetes provides you with:
+Kubernetes为您提供:
 
-* **Service discovery and load balancing**  
-Kubernetes can expose a container using the DNS name or using their own IP address. If traffic to a container is high, Kubernetes is able to load balance and distribute the network traffic so that the deployment is stable.
-* **Storage orchestration**  
-Kubernetes allows you to automatically mount a storage system of your choice, such as local storages, public cloud providers, and more.
-* **Automated rollouts and rollbacks**  
-You can describe the desired state for your deployed containers using Kubernetes, and it can change the actual state to the desired state at a controlled rate. For example, you can automate Kubernetes to create new containers for your deployment, remove existing containers and adopt all their resources to the new container.
-* **Automatic bin packing**  
-Kubernetes allows you to specify how much CPU and memory (RAM) each container needs. When containers have resource requests specified, Kubernetes can make better decisions to manage the resources for containers.
-* **Self-healing**  
-Kubernetes restarts containers that fail, replaces containers, kills containers that don’t respond to your user-defined health check, and doesn’t advertise them to clients until they are ready to serve.
-* **Secret and configuration management**  
-Kubernetes lets you store and manage sensitive information, such as passwords, OAuth tokens, and ssh keys. You can deploy and update secrets and application configuration without rebuilding your container images, and without exposing secrets in your stack configuration.
+* **服务发现和负载均衡**  
+Kubernetes可以使用DNS名称或他们的的IP地址来公开容器。如果容器的流量很高，Kubernetes能够实现负载均衡并分配网络流量，从而使部署保持稳定。
+* **存储编排**  
+Kubernetes允许您自动挂载您所选择的存储系统，例如本地存储、公共云提供商等。
+* **自动部署和回滚**  
+您可以使用Kubernetes描述已部署容器的期望状态，并且可以以可控速率将实际状态更改为期望状态。例如，您可以使Kubernetes自动为您的部署创建新的容器，删除现有容器,并将所有资源用于新容器。
+* **自动装箱**  
+Kubernetes允许您指定每个容器需要多少CPU和内存(RAM)。当容器指定了资源请求时，Kubernetes可以做出更好的决策来管理容器的资源。
+* **自我修复**  
+Kubernetes重新启动失败的容器，替换容器，杀死不符合用户定义的运行状况检查的容器，并且在它们准备好服务之前不会将它们通告给客户端。
+* **密钥和配置管理**  
+Kubernetes允许您存储和管理敏感信息，例如密码，OAuth令牌和ssh密钥。您可以部署、更新密钥和应用程序配置，而无需重建容器映像，也不会在堆栈配置中暴露密钥。
 
-## What Kubernetes is not
+## Kubernetes不是什么?
 
-Kubernetes is not a traditional, all-inclusive PaaS (Platform as a Service) system. Since Kubernetes operates at the container level rather than at the hardware level, it provides some generally applicable features common to PaaS offerings, such as deployment, scaling, load balancing, logging, and monitoring. However, Kubernetes is not monolithic, and these default solutions are optional and pluggable. Kubernetes provides the building blocks for building developer platforms, but preserves user choice and flexibility where it is important.
+Kubernetes不是一个传统的、包含所有功能的PaaS(平台即服务)系统。由于Kubernetes在容器级而非硬件级运行，因此它提供了PaaS产品的一些通用功能，例如部署，扩展，负载平衡，日志记录和监控。但是，Kubernetes不是一块铁板，这些默认解决方案是可选且可插拔的。Kubernetes为构建开发人员平台提供了构建块，但是在重要的地方保留了用户的选择和灵活性。
 
 Kubernetes:
 
-* Does not limit the types of applications supported. Kubernetes aims to support an extremely diverse variety of workloads, including stateless, stateful, and data-processing workloads. If an application can run in a container, it should run great on Kubernetes.
-* Does not deploy source code and does not build your application. Continuous Integration, Delivery, and Deployment (CI/CD) workflows are determined by organization cultures and preferences as well as technical requirements.
-* Does not provide application-level services, such as middleware (for example, message buses), data-processing frameworks (for example, Spark), databases (for example, mysql), caches, nor cluster storage systems (for example, Ceph) as built-in services. Such components can run on Kubernetes, and/or can be accessed by applications running on Kubernetes through portable mechanisms, such as the Open Service Broker.
-* Does not dictate logging, monitoring, or alerting solutions. It provides some integrations as proof of concept, and mechanisms to collect and export metrics.
-* Does not provide nor mandate a configuration language/system (for example, jsonnet). It provides a declarative API that may be targeted by arbitrary forms of declarative specifications.
-* Does not provide nor adopt any comprehensive machine configuration, maintenance, management, or self-healing systems.
-* Additionally, Kubernetes is not a mere orchestration system. In fact, it eliminates the need for orchestration. The technical definition of orchestration is execution of a defined workflow: first do A, then B, then C. In contrast, Kubernetes is comprised of a set of independent, composable control processes that continuously drive the current state towards the provided desired state. It shouldn’t matter how you get from A to C. Centralized control is also not required. This results in a system that is easier to use and more powerful, robust, resilient, and extensible.
+* 不限制支持的应用程序类型。Kubernetes旨在支持各种各样的工作负载，包括无状态，有状态和数据处理工作负载。如果应用程序可以在容器中运行，那么它应该在Kubernetes上运行得很好。
+* 不部署源代码并且不构建您的应用程序。持续集成、交付和部署(CI/CD)工作流由组织文化、首选项以及技术需求决定。
+* 不提供应用程序级服务，例如中间件(比如消息总线)、数据处理框架(比如Spark)、数据库(比如mysql)、缓存，也不提供集群存储系统(比如Ceph)作为内置服务。这些组件可以运行在Kubernetes上，并且/或者可以通过便携式机制（例如Open Service Broker）在Kubernetes上运行的应用程序访问。
+* 不指定日志记录、监视或警报的解决方案。它提供了一些集成作为概念,收集,和导出指标机制的证明。
+* 不提供也不授权配置语言/系统(例如，jsonnet)。而是提供了一个声明性API，可以通过任意形式的声明性规范来实现。
+* 不提供或采用任何全面的机器配置，维护，管理或自我修复系统。
+* 此外，Kubernetes不仅仅是一个编制系统。事实上，它消除了对编排的需求。编制的技术定义是执行已定义的工作流:首先执行a，然后执行B，然后执行c。相反，Kubernetes由一组独立的、可组合的控制流程组成，这些流程不断地将当前状态驱动到所提供的期望状态。如何从A到C无关紧要。集中控制也不是必需的。这使得系统更容易使用，功能更强大、更健壮、更有弹性并且可扩展。
 
 {{% /capture %}}
 
-{{% capture whatsnext %}}
-*   Take a look at the [Kubernetes Components](/docs/concepts/overview/components/)
-*   Ready to [Get Started](/docs/setup/)?
+{{% capture 下一步是什么 %}}
+*   看看 [Kubernetes 组件](/docs/concepts/overview/components/)
+*   准备好 [从这里开始](/docs/setup/)了吗?
 {{% /capture %}}
